@@ -11,15 +11,15 @@ import java.util.function.Function;
 
 @Component
 @AllArgsConstructor(onConstructor = @__({@Autowired}))
-public class Hello implements Function<User, Greeting> {
+public class Hello implements Function<String, Greeting> {
 
     private PaymentDao paymentDao;
     private PaymentClient client;
 
     @Override
-    public Greeting apply(User user) {
+    public Greeting apply(String timerInfo) {
         List<Payment> payments = client.getPayments();
         paymentDao.saveAll(payments);
-        return new Greeting("Hello, " + user.getName() + "!\n");
+        return new Greeting("Hello, " + timerInfo + "!\n");
     }
 }
